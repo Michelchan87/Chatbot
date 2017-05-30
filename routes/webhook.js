@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var config = require('../config/default');
+var chatService = require('../server/chatService');
 
 /* GET hello world page. */
 router.get('/webhook', function(req, res, next) {
@@ -29,7 +30,7 @@ router.post('/webhook', function (req, res) {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
         if (event.message) {
-          receivedMessage(event);
+          chatService.receivedMessage(event);
         } else {
           console.log("Webhook received unknown event: ", event);
         }
@@ -45,8 +46,4 @@ router.post('/webhook', function (req, res) {
   }
 });
 
-function receivedMessage(event) {
-  // Putting a stub for now, we'll expand it in the following steps
-  console.log("Message data: ", event.message);
-}
 module.exports = router;
