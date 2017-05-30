@@ -1,5 +1,3 @@
-var config_default = require('../config/default');
-
 const
   config = require('config'),
   request = require('request');
@@ -59,7 +57,7 @@ function sendTextMessage(recipientId, messageText) {
 
 function authenticate(req) {
   if (req.query['hub.mode'] === 'subscribe' &&
-    req.query['hub.verify_token'] === config_default.validationToken) {
+    req.query['hub.verify_token'] === VALIDATION_TOKEN) {
     console.log("Validating webhook");
     return true;
   } else {
